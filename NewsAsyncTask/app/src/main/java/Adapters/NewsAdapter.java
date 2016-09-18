@@ -13,6 +13,7 @@ import com.example.guochen.newsasynctask.R;
 import java.util.List;
 
 import Entities.NewsBean;
+import Logic.ImageLoader;
 
 /**
  * Created by guochen on 2016/09/13.
@@ -56,7 +57,10 @@ public class NewsAdapter extends BaseAdapter {
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
+        String url = newsBeanList.get(position).getIconUrl();
+        viewHolder.ivIcon.setTag(url);
         viewHolder.ivIcon.setImageResource(R.mipmap.ic_launcher);
+        new ImageLoader().showImageByThread(viewHolder.ivIcon,url);
         viewHolder.tvTitle.setText(newsBeanList.get(position).getTitle());
         viewHolder.tvContent.setText(newsBeanList.get(position).getContent());
         return convertView;
