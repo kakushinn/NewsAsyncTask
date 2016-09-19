@@ -22,11 +22,12 @@ public class NewsAdapter extends BaseAdapter {
     private Context context;
     private List<NewsBean> newsBeanList;
     private LayoutInflater inflater;
-
+    private ImageLoader imageLoader;
     public NewsAdapter(Context context, List<NewsBean> newsBeanList) {
         this.context = context;
         this.newsBeanList = newsBeanList;
         inflater = LayoutInflater.from(context);
+        imageLoader = new ImageLoader();
     }
 
     @Override
@@ -60,7 +61,7 @@ public class NewsAdapter extends BaseAdapter {
         String url = newsBeanList.get(position).getIconUrl();
         viewHolder.ivIcon.setTag(url);
         viewHolder.ivIcon.setImageResource(R.mipmap.ic_launcher);
-        new ImageLoader().showImageByThread(viewHolder.ivIcon,url);
+        imageLoader.showImageByThread(viewHolder.ivIcon, url);
         viewHolder.tvTitle.setText(newsBeanList.get(position).getTitle());
         viewHolder.tvContent.setText(newsBeanList.get(position).getContent());
         return convertView;
